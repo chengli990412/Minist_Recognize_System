@@ -66,8 +66,8 @@
    <widget class="QSplitter" name="splitter">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>20</y>
+      <x>290</x>
+      <y>30</y>
       <width>161</width>
       <height>301</height>
      </rect>
@@ -85,21 +85,6 @@
       <string>神经网络训练</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="Button_Stop">
-     <property name="text">
-      <string>训练暂停</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="Button_LoadModel">
-     <property name="text">
-      <string>网络模型导入</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="Button_SaveModel">
-     <property name="text">
-      <string>网络模型保存</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="Button_Recognize">
      <property name="text">
       <string>识别</string>
@@ -109,9 +94,9 @@
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>500</x>
+      <x>463</x>
       <y>0</y>
-      <width>104</width>
+      <width>141</width>
       <height>381</height>
      </rect>
     </property>

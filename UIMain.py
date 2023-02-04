@@ -1,8 +1,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QMainWindow
 
 import Deeplearning
+import UIDeepLearning
 import time
 
 
@@ -34,6 +35,8 @@ class Ui_MainWindow(object):
         self.Button_LoadData.clicked.connect(self.Button_Click_LoadData)
         self.Button_Train = QtWidgets.QPushButton(self.splitter)
         self.Button_Train.setObjectName("Button_Train")
+        self.Button_Train.clicked.connect(self.btnClicked)
+
         self.Button_Stop = QtWidgets.QPushButton(self.splitter)
         self.Button_Stop.setObjectName("Button_Stop")
         self.Button_LoadModel = QtWidgets.QPushButton(self.splitter)
@@ -74,3 +77,8 @@ class Ui_MainWindow(object):
     def Write_Log(self , mes):
         text = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))+str(mes)
         self.textEdit.append(text)
+
+    def btnClicked(self):
+        chile_Win = UIDeepLearning.Ui_DeepLearningWindow
+        chile_Win.show()
+        chile_Win.exec_()
