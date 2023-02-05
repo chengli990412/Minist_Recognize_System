@@ -1,11 +1,10 @@
 import sys
 
-import UIDeepLearning
 import UIMain
 from PyQt5.QtWidgets import QApplication,QMainWindow,QPushButton
 
-#版本：1.0.0.2
-#更新日期：20230204
+#版本：1.0.0.3
+#更新日期：20230205
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
