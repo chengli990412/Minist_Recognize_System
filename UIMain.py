@@ -18,6 +18,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1256, 793)
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
@@ -46,6 +47,7 @@ class Ui_MainWindow(object):
         self.Button_Train = QtWidgets.QPushButton(self.tab_2)
         self.Button_Train.setGeometry(QtCore.QRect(880, 132, 100, 50))
         self.Button_Train.setObjectName("Button_Train")
+        # self.Button_Train.clicked.connect(self.Button_Click_Dltrain)
         self.Button_Train_2 = QtWidgets.QPushButton(self.tab_2)
         self.Button_Train_2.setGeometry(QtCore.QRect(880, 184, 100, 50))
         self.Button_Train_2.setObjectName("Button_Train_2")
@@ -95,9 +97,14 @@ class Ui_MainWindow(object):
 
         # 数据集导入
     def Button_Click_LoadData(self):
-        dl = Deeplearning.DLearning
-        (Ui_MainWindow.train_images, train_labels), (Ui_MainWindow.test_images, Ui_MainWindow.test_labels) = dl.load_data('MNIST/')
+        L= Deeplearning.DeepLearningClass
+        L.Load_data ()
+        # (Ui_MainWindow.train_images, train_labels), (Ui_MainWindow.test_images, Ui_MainWindow.test_labels) = Deeplearning.load_data('MNIST/')
         self.Write_Log('数据集加载成功')
+
+    # def Button_Click_Dltrain(self):
+    #     Deeplearning.Dl_Run()
+    #     self.Write_Log('模型训练完成！')
 
     def Write_Log(self , mes):
         text = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))+str(mes)
