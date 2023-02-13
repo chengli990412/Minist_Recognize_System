@@ -90,11 +90,11 @@
      <attribute name="title">
       <string>神经网络</string>
      </attribute>
-     <widget class="QPushButton" name="Button_Train_3">
+     <widget class="QPushButton" name="Button_StopTrain">
       <property name="geometry">
        <rect>
-        <x>880</x>
-        <y>236</y>
+        <x>710</x>
+        <y>226</y>
         <width>100</width>
         <height>50</height>
        </rect>
@@ -106,8 +106,8 @@
      <widget class="QPushButton" name="Button_Train">
       <property name="geometry">
        <rect>
-        <x>880</x>
-        <y>132</y>
+        <x>710</x>
+        <y>122</y>
         <width>100</width>
         <height>50</height>
        </rect>
@@ -116,11 +116,11 @@
        <string>神经网络训练</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="Button_Train_2">
+     <widget class="QPushButton" name="Button_LoadModel">
       <property name="geometry">
        <rect>
-        <x>880</x>
-        <y>184</y>
+        <x>710</x>
+        <y>174</y>
         <width>100</width>
         <height>50</height>
        </rect>
@@ -129,60 +129,11 @@
        <string>网络模型导入</string>
       </property>
      </widget>
-     <widget class="QTableView" name="tableView">
+     <widget class="QPushButton" name="Button_SaveModel">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>90</y>
-        <width>371</width>
-        <height>261</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>400</y>
-        <width>54</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>训练参数</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>360</x>
-        <y>690</y>
-        <width>54</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>训练进度</string>
-      </property>
-     </widget>
-     <widget class="QProgressBar" name="progressBar">
-      <property name="geometry">
-       <rect>
-        <x>420</x>
-        <y>690</y>
-        <width>251</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="value">
-       <number>24</number>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="Button_Train_4">
-      <property name="geometry">
-       <rect>
-        <x>880</x>
-        <y>288</y>
+        <x>710</x>
+        <y>278</y>
         <width>100</width>
         <height>50</height>
        </rect>
@@ -191,17 +142,27 @@
        <string>模型保存</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="Button_Train_5">
+     <widget class="QPushButton" name="Button_ReadModel">
       <property name="geometry">
        <rect>
-        <x>880</x>
-        <y>340</y>
+        <x>710</x>
+        <y>330</y>
         <width>100</width>
         <height>50</height>
        </rect>
       </property>
       <property name="text">
        <string>模型读取</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>440</y>
+        <width>511</width>
+        <height>261</height>
+       </rect>
       </property>
      </widget>
     </widget>

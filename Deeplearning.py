@@ -9,58 +9,63 @@ import tensorflow as tf
 from tensorflow import keras
 from keras import layers, optimizers, datasets
 import tensorboard as tb
+from UIMain import  Ui_MainWindow
+
+import MyGlobal as gl
+
+# #深度学习类
 
 
-# #深度学习静态类
 
-image_train = ()
-label_train = ()
-image_test = ()
-label_test = ()
-
+# 数据集加载
 def load_data()->str:
-    global image_train,image_test,label_train,label_test
-    files = ['train-labels-idx1-ubyte.gz', 'train-images-idx3-ubyte.gz', 't10k-labels-idx1-ubyte.gz',
+    try:
+        global image_train, image_test, label_train, label_test
+        files = ['train-labels-idx1-ubyte.gz', 'train-images-idx3-ubyte.gz', 't10k-labels-idx1-ubyte.gz',
                  't10k-images-idx3-ubyte.gz']
-    paths = []
-    for fname in files:
-        paths.append(os.path.join('MNIST/', fname))
-    if len(paths) == 0:
-        return '路径异常，请检测路径设置是否正确'
+        paths = []
+        for fname in files:
+            paths.append(os.path.join('MNIST/', fname))
+        if len(paths) == 0:
+            return '路径异常，请检测路径设置是否正确'
 
-    with gzip.open(paths[0], 'rb') as lbpath:
-            label_train = np.frombuffer(lbpath.read(), np.uint8, offset=8)
-    with gzip.open(paths[1], 'rb') as imgpath:
-            image_train = np.frombuffer(imgpath.read(), np.uint8, offset=16).reshape(len(label_train), 28, 28)
+        with gzip.open(paths[0], 'rb') as lbpath:
+            gl.label_train = np.frombuffer(lbpath.read(), np.uint8, offset=8)
+        with gzip.open(paths[1], 'rb') as imgpath:
+            gl.image_train = np.frombuffer(imgpath.read(), np.uint8, offset=16).reshape(len(label_train), 28, 28)
 
-    with gzip.open(paths[2], 'rb') as lbpath:
-            label_test = np.frombuffer(lbpath.read(), np.uint8, offset=8)
-    with gzip.open(paths[3], 'rb') as imgpath:
-            image_test = np.frombuffer(imgpath.read(), np.uint8, offset=16).reshape(len(label_test), 28, 28)
+        with gzip.open(paths[2], 'rb') as lbpath:
+            gl.label_test = np.frombuffer(lbpath.read(), np.uint8, offset=8)
+        with gzip.open(paths[3], 'rb') as imgpath:
+            gl.image_test = np.frombuffer(imgpath.read(), np.uint8, offset=16).reshape(len(label_test), 28, 28)
+        return 'OK'
+    except:
+        return 'NG'
 
-    return 'OK'
+
     #创建模型
 
 def CreateModel():
-    model = keras.Sequential([layers.Dense(256, activation='relu'),
+    gl.Model = keras.Sequential([layers.Dense(256, activation='relu'),
                                   layers.Dense(128, activation='relu'),
                                   layers.Dense(10)])
-    model.build(input_shape=(None, 28 * 28))
-    model.summary()
-    return model
+    gl.Model.build(input_shape=(None, 28 * 28))
+    gl.Model.summary()
+    return 'OK'
+
     #加载模型
 
 def LoadModel(path):
     new_model = keras.models.load_model('net_model.h5')
     return new_model
 
-def SaveModel(model,path):
-    model.save(path)
+def SaveModel(model):
+    model.save('Model/')
     #训练
 
-def Dl_Run(train_images, train_labels,MainWindow:object):
-    x = tf.convert_to_tensor(train_images, dtype=tf.float32) / 255
-    db = tf.data.Dataset.from_tensor_slices((x, train_labels))
+def Dl_Run():
+    x = tf.convert_to_tensor(gl.train_images, dtype=tf.float32) / 255
+    db = tf.data.Dataset.from_tensor_slices((x, gl.train_labels))
     db = db.batch(100).repeat(20)
     optimizer = optimizers.SGD(lr=0.02)
     acc_meter = keras.metrics.Accuracy()
@@ -81,8 +86,8 @@ def Dl_Run(train_images, train_labels,MainWindow:object):
         # 更新准备率
         acc_meter.update_state(tf.argmax(out, axis=1), yy)
         # 更新梯度参数
-        grads = tape.gradient(loss, model.trainable_variables)
-        optimizer.apply_gradients(zip(grads, model.trainable_variables))
+        grads = tape.gradient(loss, gl.model.trainable_variables)
+        optimizer.apply_gradients(zip(grads, gl.model.trainable_variables))
         # 参数存储，便于查看曲线图
         with summary_writer.as_default():
             tf.summary.scalar('train-loss', float(loss), step=step)
@@ -94,7 +99,6 @@ def Dl_Run(train_images, train_labels,MainWindow:object):
             print(step, 'loss:', float(loss), 'acc:', acc_meter.result().numpy())
             acc_meter.reset_states()
 
-    return model
 
 
 
